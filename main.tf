@@ -15,7 +15,7 @@ provider "aws" {
   skip_requesting_account_id  = true
   skip_metadata_api_check     = true
   endpoints {
-    s3 = "http://s3.localhost.localstack.cloud:4566"
+    s3 = "http://127.0.0.1:4566"
   }
 }
 
@@ -26,9 +26,9 @@ resource "aws_s3_bucket" "bucket" {
 
 resource "aws_s3_bucket_public_access_block" "bucket_public_access_block" {
   bucket                  = aws_s3_bucket.bucket.id
-  block_public_acls       = false
-  block_public_policy     = false
-  ignore_public_acls      = false
-  restrict_public_buckets = false
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
   depends_on              = [aws_s3_bucket.bucket]
 }
