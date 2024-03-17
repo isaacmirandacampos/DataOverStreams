@@ -1,22 +1,17 @@
 # DataOverStreams
 
 A manipulate of large data. We can upload a large csv file to s3 and consume the file when the upload is complete.
+The aim is to use the Terraform, Localstack and Docker to manage the infrastructure.
 
 ## Technologies used
 
+- Terraform
+- Docker
+- Localstack
 - Node.js
 - Typescript
 - Fastify
 - AWS S3
-
-### Devops
-
-- Terraform
-
-### Tools
-
-- Localstack
-- Docker
 
 ## Prerequisites
 
