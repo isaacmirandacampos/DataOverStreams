@@ -1,5 +1,6 @@
-import fastify, { FastifyInstance, FastifyReply } from 'fastify';
+import fastify, { FastifyInstance } from 'fastify';
 import crypto from 'crypto';
+import { routes } from './routes';
 
 class App {
   server: FastifyInstance;
@@ -20,9 +21,7 @@ class App {
 
   public async mountRoutes() {
     this.server.register(async (instance, _opts, done) => {
-      instance.get('/ping', async (_req, res: FastifyReply) => {
-        res.send({ now: new Date().toISOString() });
-      });
+      routes(instance);
       done();
     });
   }
