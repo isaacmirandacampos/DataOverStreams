@@ -1,0 +1,10 @@
+{
+  "version": "1",
+  "name": "DataOverStreams",
+  "type": "collection",
+  "scripts": {
+    "filesystemAccess": {
+      "allow": true
+    }
+  }
+}
