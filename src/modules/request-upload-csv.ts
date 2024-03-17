@@ -1,6 +1,6 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 import crypto from 'crypto';
-import { requestSignedUrlToSendFile } from '@/shared/s3';
+import { requestSignedUrlToSendFile } from '../shared/s3';
 
 export async function requestUploadCsv(
   _req: FastifyRequest,
