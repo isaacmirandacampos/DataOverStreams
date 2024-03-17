@@ -4,10 +4,60 @@ A manipulate of large data. We can upload a large csv file to s3 and consume the
 
 ## Technologies used
 
-- Terraform
 - Node.js
-- S3
+- Typescript
+- Fastify
+- AWS S3
+
+### Devops
+
+- Terraform
 
 ### Tools
 
 - Localstack
+- Docker
+
+## Prerequisites
+
+- Docker
+- Docker compose
+- Terraform cli
+- awslocal cli
+
+## How to run?
+
+Create the localstack container:
+
+```sh
+docker compose up -d --build
+```
+
+Create the S3 bucket:
+
+```sh
+terraform init
+terraform apply -auto-approve
+```
+
+You can check that it is working by running the command:
+
+```sh
+awslocal s3api list-buckets
+```
+
+The output:
+
+```sh
+{
+    "Buckets": [
+        {
+            "Name": "credentials",
+            "CreationDate": "2024-03-17T12:49:49+00:00"
+        }
+    ],
+    "Owner": {
+        ...
+    }
+}
+```
