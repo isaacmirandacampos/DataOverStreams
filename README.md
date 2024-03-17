@@ -10,8 +10,8 @@ The aim is to use the Terraform, Localstack and Docker to manage the infrastruct
 - Localstack
 - Node.js
 - Typescript
-- Fastify
 - AWS S3
+- DynamoDB
 
 ## Prerequisites
 
@@ -22,13 +22,13 @@ The aim is to use the Terraform, Localstack and Docker to manage the infrastruct
 
 ## How to run?
 
-Create the localstack container:
+Create the localstack and api container:
 
 ```sh
 docker compose up -d --build
 ```
 
-Create the S3 bucket:
+Create the infrastructure in localstack:
 
 ```sh
 terraform init
@@ -56,3 +56,7 @@ The output:
     }
 }
 ```
+
+### Use endpoint documentation
+
+You can install the usebruno tool and import the collection.
