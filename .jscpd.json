@@ -1,0 +1,17 @@
+{
+  "path": ["src/"],
+  "output": "cpd",
+  "reporters": ["console", "html"],
+  "minLines": 2,
+  "minTokens": 10,
+  "threshold": 50,
+  "languages": ["typescript"],
+  "ignore": [
+    "import .*",
+    "**/node_modules/**",
+    "**/.git/**",
+    "**/*.md",
+    "**/*.test.ts",
+    "**/*.spec.ts"
+  ]
+}

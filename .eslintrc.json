@@ -1,0 +1,57 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "airbnb-base",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint", "prettier"],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }
+    ],
+    "no-console": "off",
+    "camelcase": "off",
+    "lines-between-class-members": "off",
+    "prefer-destructuring": "off",
+    "no-nested-ternary": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "import/prefer-default-export": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "no-continue": "off",
+    "consistent-return": "off",
+    "import/newline-after-import": "off",
+    "dot-notation": "off",
+    "no-param-reassign": "off",
+    "class-methods-use-this": "off",
+    "object-shorthand": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": ["**/*.test.ts", "vitest.config.ts"]
+      }
+    ],
+    "no-restricted-syntax": ["error", "LabeledStatement", "WithStatement"],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never"
+      }
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
+  }
+}
