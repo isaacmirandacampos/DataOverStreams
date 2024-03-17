@@ -2,3 +2,6 @@ build/
 node_modules/
 credential_sample.csv
 cpd/
+.terraform/
+volume/
+terraform.*
