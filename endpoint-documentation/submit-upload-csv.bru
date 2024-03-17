@@ -1,0 +1,15 @@
+meta {
+  name: submit-upload-csv
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{signed-url}}
+  body: multipartForm
+  auth: none
+}
+
+body:multipart-form {
+  file: @file(/home/isaac/projects/personal/DataOverStreams/credential_sample.csv)
+}

@@ -1,0 +1,17 @@
+meta {
+  name: request-upload-csv
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseURL}}/request-upload-csv
+  body: none
+  auth: none
+}
+
+script:post-response {
+  let data = res.getBody();
+  if (data.url) 
+    bru.setVar('signed-url', data.url)
+}
