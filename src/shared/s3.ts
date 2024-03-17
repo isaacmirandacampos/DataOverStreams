@@ -1,20 +1,12 @@
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
-import {
-  S3Client,
-  PutObjectCommand,
-  GetObjectCommand,
-} from '@aws-sdk/client-s3';
-import { Readable } from 'stream';
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
 const BUCKET = 'credentials';
 
 const client = new S3Client({
   region: 'us-east-1',
   endpoint: 'http://127.0.0.1:4566',
-  credentials: {
-    accessKeyId: '123',
-    secretAccessKey: '123',
-  },
+  credentials: { accessKeyId: 'test', secretAccessKey: 'test' },
 });
 
 export async function requestSignedUrlToSendFile(file: string) {
@@ -25,15 +17,4 @@ export async function requestSignedUrlToSendFile(file: string) {
   });
 
   return getSignedUrl(client, command, { expiresIn });
-}
-
-export async function getObject(file: string): Promise<Readable | undefined> {
-  const response = await client.send(
-    new GetObjectCommand({
-      Bucket: BUCKET,
-      Key: file,
-    }),
-  );
-  if (!response.Body) return undefined;
-  return response.Body as Readable;
 }
