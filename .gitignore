@@ -5,3 +5,4 @@ cpd/
 .terraform/
 volume/
 terraform.*
+lambda/
