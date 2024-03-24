@@ -97,9 +97,9 @@ resource "aws_lambda_permission" "lambda_permission" {
 resource "aws_dynamodb_table" "dynamodb_table" {
   name         = "credentials"
   billing_mode = "PAY_PER_REQUEST"
-  hash_key     = "identifier_code"
+  hash_key     = "identifier"
   attribute {
-    name = "identifier_code"
+    name = "identifier"
     type = "S"
   }
 }

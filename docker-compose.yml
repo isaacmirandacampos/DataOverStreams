@@ -1,18 +1,25 @@
-version: "3.8"
-
+version: '3.8'
 services:
   localstack:
-    container_name: "${LOCALSTACK_DOCKER_NAME:-localstack-main}"
+    container_name: '${LOCALSTACK_DOCKER_NAME:-localstack-main}'
     image: localstack/localstack
     ports:
-      - "4566:4566"            # LocalStack Gateway
+      - '4566:4566' # LocalStack Gateway
     environment:
-      # LocalStack configuration: https://docs.localstack.cloud/references/configuration/
       - DEBUG=${DEBUG:-0}
     volumes:
-      - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
-      - "/var/run/docker.sock:/var/run/docker.sock"
+      - '${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    networks:
+      - custom-net
   api:
     build: .
     ports:
-      - "5000:5000"
+      - '5000:5000'
+    depends_on:
+      - localstack
+    networks:
+      - custom-net
+networks:
+  custom-net:
+    driver: bridge

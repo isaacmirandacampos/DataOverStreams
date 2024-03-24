@@ -1,15 +1,17 @@
-import { DynamoDBClient, ScanCommand } from '@aws-sdk/client-dynamodb';
+import { DynamoDBClient, GetItemCommand } from '@aws-sdk/client-dynamodb';
 
 const client = new DynamoDBClient({
   region: 'us-east-1',
-  endpoint: 'http://127.0.0.1:4566',
+  endpoint: 'http://localstack:4566',
   credentials: { accessKeyId: 'test', secretAccessKey: 'test' },
 });
 
-export function fetchData() {
-  const command = new ScanCommand({
+export function fetchData(identifier: string, page: string) {
+  const command = new GetItemCommand({
     TableName: 'credentials',
-    Limit: 10,
+    Key: {
+      identifier: { S: `${identifier}-${page}` },
+    },
   });
 
   return client.send(command);
