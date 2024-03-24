@@ -4,7 +4,7 @@
   "description": "A simple project to upload a large csv to s3 and consume the file using javascript streams.",
   "main": "src/server/index.ts",
   "scripts": {
-    "dev:server": "ts-node -r tsconfig-paths/register src/server/index.ts",
+    "dev:server": "ts-node -r tsconfig-paths/register src/index.ts",
     "test": "npx jest --passWithNoTests --silent --noStackTrace --runInBand",
     "build": "tsc",
     "dry": "npx jscpd --config .jscpd.json",
@@ -50,7 +50,6 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.535.0",
-    "@aws-sdk/s3-request-presigner": "^3.535.0",
-    "fastify": "^4.26.2"
+    "@aws-sdk/s3-request-presigner": "^3.535.0"
   }
 }

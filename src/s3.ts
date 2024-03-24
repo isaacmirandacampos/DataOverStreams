@@ -9,7 +9,7 @@ const client = new S3Client({
   credentials: { accessKeyId: 'test', secretAccessKey: 'test' },
 });
 
-export async function requestSignedUrlToSendFile(file: string) {
+export async function requestASignedUrlBucket(file: string) {
   const expiresIn = 60 * 60; // 1 hour
   const command = new PutObjectCommand({
     Bucket: BUCKET,
