@@ -1,5 +1,6 @@
 import http from 'node:http';
 import { requestASignedUrlBucket } from './s3';
+import { fetch_credentials } from './fetch_credentials';
 
 class App {
   server: http.Server;
@@ -22,6 +23,10 @@ class App {
             const url = await requestASignedUrlBucket(file);
             response.write(JSON.stringify({ url }));
           }
+
+          if (pathname === '/fetch-credentials') {
+            await fetch_credentials(request, response);
+          }
         });
       },
     );
@@ -35,13 +40,14 @@ class App {
     };
   }
 
-  private get(
+  private async get(
     method: string,
     response: http.ServerResponse,
-    callback: () => void,
+    callback: () => Promise<void>,
   ) {
+    response.writeHead(200, { 'Content-Type': 'application/json' });
     if (method === 'GET') {
-      callback();
+      await callback();
     }
     response.end();
   }
