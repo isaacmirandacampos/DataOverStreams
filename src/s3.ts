@@ -15,6 +15,5 @@ export async function requestASignedUrlBucket(file: string) {
     Bucket: BUCKET,
     Key: file,
   });
-
   return getSignedUrl(client, command, { expiresIn });
 }

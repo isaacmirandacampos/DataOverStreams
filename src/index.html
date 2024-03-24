@@ -10,6 +10,12 @@
       background-color: #202020;
       color: #f2f2f2;
     }
+    .form {
+      display: flex;
+      justify-content: center;
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
     table {
       width: 50vw;
       border-collapse: collapse;
@@ -35,6 +41,11 @@
     }
   </style>
   <body>
+    <div class="form">
+      <label for="identifier">identifier</label>
+      <input id="identifier" type="text" />
+      <button type="button">search</button>
+    </div>
     <table>
       <thead>
         <tr>
@@ -44,12 +55,19 @@
       </thead>
     </table>
     <div class="pagination">
-      <button>Previous</button>
+      <button type="button">Previous</button>
       <span class="pageNumber">0</span>
-      <button>Next</button>
+      <button type="button">Next</button>
     </div>
   </body>
   <script>
+    let page = 0;
+    function updatePageNumber(page) {
+      const pageNumber = document.querySelector('.pageNumber');
+      pageNumber.textContent = `${page}`;
+      pageNumber.innerText = `${page}`;
+    }
+
     function loadData(data) {
       const table = document.querySelector('table');
       if (table.children.length > 1) {
@@ -70,27 +88,30 @@
     }
 
     function fetchData(page) {
-      fetch('http://localhost:5000/fetch-credentials')
+      const input = document.querySelector('#identifier');
+      const identifier = input.value || 'unknown';
+      updatePageNumber(page);
+      fetch(
+        `http://localhost:5000/fetch-credentials/${identifier}?page=${page}`,
+      )
         .then(response => response.json())
         .then(data => loadData(data))
         .catch(err => console.error(err));
     }
-    let page = 0;
-    fetchData(page);
+    fetchData(0);
 
-    const pageNumber = document.querySelector('.pageNumber');
-    const pagination = document.querySelector('.pagination');
-    pagination.addEventListener('click', event => {
-      if (event.target.textContent === 'Previous') {
-        if (page === 1) return;
-        page--;
-        fetchData(page);
-      } else if (event.target.textContent === 'Next') {
-        page++;
-        fetchData(page);
+    document.querySelector('.form').addEventListener('click', function () {
+      if (event.target.textContent === 'search') {
+        fetchData(0);
       }
-      pageNumber.textContent = `${page}`;
-      pageNumber.innerText = `${page}`;
+    });
+    document.querySelector('.pagination').addEventListener('click', event => {
+      if (event.target.textContent === 'Previous') {
+        if (page < 0) return;
+        fetchData(page--);
+      } else if (event.target.textContent === 'Next') {
+        fetchData(page++);
+      }
     });
   </script>
 </html>
