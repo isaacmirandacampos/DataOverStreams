@@ -9,7 +9,7 @@ const client = new DynamoDBClient({
 export function fetchData() {
   const command = new ScanCommand({
     TableName: 'credentials',
-    Limit: 10000,
+    Limit: 10,
   });
 
   return client.send(command);

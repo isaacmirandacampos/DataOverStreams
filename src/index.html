@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Credentials</title>
+  </head>
+  <style>
+    body {
+      background-color: #202020;
+      color: #f2f2f2;
+    }
+    table {
+      width: 50vw;
+      border-collapse: collapse;
+      margin: 0 auto;
+    }
+    th,
+    td {
+      border: 1px solid white;
+      padding: 8px;
+      text-align: left;
+    }
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 16px;
+      gap: 20px;
+    }
+    .pagination span {
+      background-color: #404040;
+      color: #f2f2f2;
+      padding: 8px;
+      border-radius: 4px;
+    }
+  </style>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <th>idenfier_code</th>
+          <th>name</th>
+        </tr>
+      </thead>
+    </table>
+    <div class="pagination">
+      <button>Previous</button>
+      <span class="pageNumber">0</span>
+      <button>Next</button>
+    </div>
+  </body>
+  <script>
+    function loadData(data) {
+      const table = document.querySelector('table');
+      if (table.children.length > 1) {
+        table.removeChild(table.children[1]);
+      }
+      const tbody = document.createElement('tbody');
+      data.forEach(row => {
+        const tr = document.createElement('tr');
+        const td1 = document.createElement('td');
+        const td2 = document.createElement('td');
+        td1.textContent = row.identifier_code;
+        td2.textContent = row.name;
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tbody.appendChild(tr);
+      });
+      table.appendChild(tbody);
+    }
+
+    function fetchData(page) {
+      fetch('http://localhost:5000/fetch-credentials')
+        .then(response => response.json())
+        .then(data => loadData(data))
+        .catch(err => console.error(err));
+    }
+    let page = 0;
+    fetchData(page);
+
+    const pageNumber = document.querySelector('.pageNumber');
+    const pagination = document.querySelector('.pagination');
+    pagination.addEventListener('click', event => {
+      if (event.target.textContent === 'Previous') {
+        if (page === 1) return;
+        page--;
+        fetchData(page);
+      } else if (event.target.textContent === 'Next') {
+        page++;
+        fetchData(page);
+      }
+      pageNumber.textContent = `${page}`;
+      pageNumber.innerText = `${page}`;
+    });
+  </script>
+</html>
