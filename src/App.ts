@@ -42,8 +42,8 @@ class App {
   ) {
     if (method === 'GET') {
       callback();
-      response.end();
     }
+    response.end();
   }
 }
 
