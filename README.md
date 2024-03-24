@@ -3,6 +3,10 @@
 A manipulate of large data. We can upload a large csv file to s3 and consume the file when the upload is complete.
 The aim is to use the Terraform, Localstack and Docker to manage the infrastructure. As well as making a simple code dealing with this file on demand.
 
+## Diagram
+
+![diagram of data over streams](images/flow.png 'Diagram of data over streams')
+
 ## Technologies used
 
 - Terraform
