@@ -22,7 +22,6 @@ The aim is to use the Terraform, Localstack and Docker to manage the infrastruct
 - Docker
 - Docker compose
 - Terraform cli
-- awslocal cli
 
 ## How to run?
 
